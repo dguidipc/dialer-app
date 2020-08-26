@@ -13,7 +13,7 @@ Build-Depends:
  qml-module-qtsysteminfo (>= 5.0~),
  qml-module-qtcontacts,
  qml-module-qttest,
- qml-modulee-ubuntu-components,
+ qml-module-ubuntu-components,
  qt5-default,
  qtbase5-dev (>= 5.0),
  qtdeclarative5-dev (>= 5.0),
