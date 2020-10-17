@@ -41,7 +41,7 @@ inline QString dialerAppDirectory() {
     } else if (isRunningInstalled()) {
         return QString("@CMAKE_INSTALL_PREFIX@/@DIALER_APP_DIR@/");
     } else {
-        return QString("@CMAKE_SOURCE_DIR@/src/qml/");
+        return QString("/usr/share/dialer-app/");
     }
 }
 

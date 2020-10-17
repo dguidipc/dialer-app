@@ -25,6 +25,7 @@
 #include <QTemporaryFile>
 #include <QTextStream>
 #include <QQmlDebuggingEnabler>
+#include <QLockFile>
 
 // libc
 #include <cerrno>
@@ -43,10 +44,15 @@ int main(int argc, char** argv)
     QGuiApplication::setApplicationName("Dialer App");
     DialerApplication application(argc, argv);
 
+    QLockFile lockFile("/tmp/dialerapp.lock");
+    if(!lockFile.tryLock(100)){
+        qDebug() << "Dialer App already running!";
+        return(0);
+    }
+
     if (!application.setup()) {
         return 0;
     }
 
     return application.exec();
 }
-
