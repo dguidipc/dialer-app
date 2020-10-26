@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 16:58-0200\n"
+"POT-Creation-Date: 2020-10-26 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,16 @@ msgid "#"
 msgstr ""
 
 #. TRANSLATORS: %1 is the call duration here.
-#: ../src/qml/LiveCallPage/LiveCall.qml:454
+#: ../src/qml/LiveCallPage/LiveCall.qml:471
 #, qt-format
 msgid "%1 - on hold"
+msgstr ""
+
+#. TRANSLATORS: %1 is the displayname of the account
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:30
+#: ../src/qml/SettingsPage/AccountSettings/sip.qml:26
+#, qt-format
+msgid "%1 Number Rewrite"
 msgstr ""
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
@@ -123,6 +130,10 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+#: ../src/qml/SettingsPage/SettingsPage.qml:122
+msgid "Add an online account"
+msgstr ""
+
 #: ../src/qml/HistoryPage/HistoryPage.qml:68
 msgctxt "All Calls"
 msgid "All"
@@ -137,7 +148,7 @@ msgstr ""
 msgid "All calls"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:341
+#: ../src/qml/LiveCallPage/LiveCall.qml:350
 msgid "Bluetooth device"
 msgstr ""
 
@@ -157,11 +168,11 @@ msgstr ""
 msgid "Call Waiting"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:152
+#: ../src/qml/LiveCallPage/LiveCall.qml:160
 msgid "Call ended"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:297
+#: ../src/qml/LiveCallPage/LiveCall.qml:306
 msgid "Call failed"
 msgstr ""
 
@@ -180,7 +191,7 @@ msgstr ""
 msgid "Call forwarding status can't be checked "
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:160
+#: ../src/qml/LiveCallPage/LiveCall.qml:168
 msgid "Call holding failure"
 msgstr ""
 
@@ -192,9 +203,9 @@ msgstr ""
 msgid "Call waiting"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:509
+#: ../src/qml/DialerPage/DialerPage.qml:542
 #: ../src/qml/LiveCallPage/ConferenceCallDisplay.qml:113
-#: ../src/qml/LiveCallPage/LiveCall.qml:456
+#: ../src/qml/LiveCallPage/LiveCall.qml:473
 #: ../src/qml/LiveCallPage/MultiCallDisplay.qml:108
 msgid "Calling"
 msgstr ""
@@ -211,6 +222,7 @@ msgstr ""
 #: ../src/qml/ContactsPage/ContactsPage.qml:145
 #: ../src/qml/Dialogs/DisableFlightModeDialog.qml:38
 #: ../src/qml/SettingsPage/CallForwarding.qml:236
+#: ../src/qml/SettingsPage/OnlineAccountsHelper.qml:78
 msgid "Cancel"
 msgstr ""
 
@@ -220,7 +232,11 @@ msgstr ""
 msgid "Change all Call associations to %1?"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:78
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:138
+msgid "Characters to remove"
+msgstr ""
+
+#: ../src/qml/DialerPage/DialerPage.qml:86
 #: ../src/qml/Dialogs/NotificationDialog.qml:29
 msgid "Close"
 msgstr ""
@@ -230,7 +246,7 @@ msgstr ""
 msgid "Conference"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:131
+#: ../src/qml/LiveCallPage/LiveCall.qml:139
 msgid "Conference call failure"
 msgstr ""
 
@@ -243,7 +259,7 @@ msgid "Connected Line Restriction"
 msgstr ""
 
 #: ../src/qml/HistoryPage/HistoryDetailsPage.qml:66
-#: ../src/qml/HistoryPage/HistoryPage.qml:369
+#: ../src/qml/HistoryPage/HistoryPage.qml:378
 msgid "Contact Details"
 msgstr ""
 
@@ -268,14 +284,26 @@ msgstr ""
 msgid "DEF"
 msgstr ""
 
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:118
+msgid "Default area code"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:96
+msgid "Default country code"
+msgstr ""
+
 #: ../src/qml/HistoryPage/HistoryDetailsPage.qml:86
 #: ../src/qml/HistoryPage/HistoryDetailsPage.qml:253
-#: ../src/qml/HistoryPage/HistoryPage.qml:341
+#: ../src/qml/HistoryPage/HistoryPage.qml:350
 msgid "Delete"
 msgstr ""
 
-#: ../src/qml/HistoryPage/HistoryPage.qml:350
+#: ../src/qml/HistoryPage/HistoryPage.qml:359
 msgid "Details"
+msgstr ""
+
+#: ../src/qml/SettingsPage/SettingsPage.qml:113
+msgid "Dialpad tones"
 msgstr ""
 
 #: ../src/qml/Dialogs/DisableFlightModeDialog.qml:47
@@ -300,33 +328,49 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:132
-#: ../src/qml/DialerPage/DialerPage.qml:142
+#: ../src/qml/DialerPage/DialerPage.qml:141
+#: ../src/qml/DialerPage/DialerPage.qml:151
 msgid "Emergency Calls"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:467
+#: ../src/qml/DialerPage/DialerPage.qml:500
 msgid "Emergency call"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:303
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:100
+msgid "Enter a country code"
+msgstr ""
+
+#: ../src/qml/DialerPage/DialerPage.qml:326
 #: ../src/qml/SettingsPage/CallForwardItem.qml:171
 msgid "Enter a number"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:163
+msgid "Enter a prefix"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:122
+msgid "Enter an area code"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:142
+msgid "Enter the characters to remove"
 msgstr ""
 
 #: ../src/qml/Dialogs/UssdErrorDialog.qml:28
 msgid "Error"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:161
+#: ../src/qml/LiveCallPage/LiveCall.qml:169
 msgid "Failed to activate the call."
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:132
+#: ../src/qml/LiveCallPage/LiveCall.qml:140
 msgid "Failed to create a conference call."
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:162
+#: ../src/qml/LiveCallPage/LiveCall.qml:170
 msgid "Failed to place the active call on hold."
 msgstr ""
 
@@ -334,7 +378,7 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:137
+#: ../src/qml/DialerPage/DialerPage.qml:146
 #: ../src/qml/Dialogs/DisableFlightModeDialog.qml:27
 msgid "Flight Mode"
 msgstr ""
@@ -379,7 +423,7 @@ msgstr ""
 msgid "Incoming"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:129
+#: ../src/qml/DialerPage/DialerPage.qml:138
 msgid "Initializing..."
 msgstr ""
 
@@ -410,7 +454,7 @@ msgstr ""
 msgid "MNO"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:573
+#: ../src/qml/LiveCallPage/LiveCall.qml:590
 msgid "Merge calls"
 msgstr ""
 
@@ -428,6 +472,10 @@ msgstr ""
 msgid "My phone is unreachable"
 msgstr ""
 
+#: ../src/qml/Ubuntu/Contacts.0.1/ContactListView.qml:496
+msgid "New contact"
+msgstr ""
+
 #: ../src/qml/Dialogs/NoDefaultSIMCardDialog.qml:70
 #: ../src/qml/Dialogs/SetDefaultSIMCardDialog.qml:40
 msgid "No"
@@ -437,17 +485,21 @@ msgstr ""
 msgid "No SIM card selected"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:122
+#: ../src/qml/LiveCallPage/LiveCall.qml:130
 msgid "No calls"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:151 ../src/qml/dialer-app.qml:374
+#: ../src/qml/DialerPage/DialerPage.qml:160 ../src/qml/dialer-app.qml:374
 #: ../src/qml/dialer-app.qml:379
 msgid "No network"
 msgstr ""
 
-#: ../src/qml/HistoryPage/HistoryPage.qml:245
+#: ../src/qml/HistoryPage/HistoryPage.qml:254
 msgid "No recent calls"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:88
+msgid "Number rewrite"
 msgstr ""
 
 #: ../src/qml/SettingsPage/CallForwarding.qml:279
@@ -458,12 +510,17 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: ../src/qml/SettingsPage/AccountSettings/sip.qml:28
 #: ../src/qml/SettingsPage/CallForwarding.qml:382
 msgid "Off"
 msgstr ""
 
 #: ../src/qml/Dialogs/SimLockedDialog.qml:50
 msgid "Ok"
+msgstr ""
+
+#: ../src/qml/SettingsPage/AccountSettings/sip.qml:28
+msgid "On"
 msgstr ""
 
 #: ../src/qml/LiveCallPage/MultiCallDisplay.qml:129
@@ -479,9 +536,7 @@ msgstr ""
 msgid "PQRS"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:149
-#: ../src/qml/SettingsPage/SettingsPage.qml:29
-#: ../src/dialer-app.desktop.in.in.h:1
+#: ../src/qml/DialerPage/DialerPage.qml:158 ../src/dialer-app.desktop.in.in.h:1
 msgid "Phone"
 msgstr ""
 
@@ -489,7 +544,7 @@ msgstr ""
 msgid "Phone App"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:345
+#: ../src/qml/LiveCallPage/LiveCall.qml:354
 msgid "Phone Speaker"
 msgstr ""
 
@@ -499,6 +554,10 @@ msgstr ""
 
 #: ../src/dialer-app.desktop.in.in.h:4
 msgid "Phone;Dialer;Dial;Call;Keypad"
+msgstr ""
+
+#: ../src/qml/SettingsPage/OnlineAccountsHelper.qml:46
+msgid "Pick an account to create."
 msgstr ""
 
 #: ../src/qml/SettingsPage/CallForwarding.qml:270
@@ -516,6 +575,10 @@ msgstr ""
 msgid "Please wait"
 msgstr ""
 
+#: ../src/qml/SettingsPage/AccountSettings/SipNumberRewrite.qml:159
+msgid "Prefix"
+msgstr ""
+
 #: ../src/qml/LiveCallPage/ConferenceCallDisplay.qml:141
 msgid "Private"
 msgstr ""
@@ -525,7 +588,7 @@ msgstr ""
 msgid "Private number"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:522
+#: ../src/qml/DialerPage/DialerPage.qml:555
 #: ../src/qml/HistoryPage/HistoryPage.qml:47
 msgid "Recent"
 msgstr ""
@@ -542,7 +605,7 @@ msgstr ""
 msgid "SIM Card is locked"
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:140
+#: ../src/qml/DialerPage/DialerPage.qml:149
 msgid "SIM Locked"
 msgstr ""
 
@@ -568,7 +631,7 @@ msgid ""
 "choice in <a href=\"system_settings\">System Settings</a>."
 msgstr ""
 
-#: ../src/qml/HistoryPage/HistoryPage.qml:360
+#: ../src/qml/HistoryPage/HistoryPage.qml:369
 msgid "Send message"
 msgstr ""
 
@@ -582,6 +645,7 @@ msgid "Set"
 msgstr ""
 
 #: ../src/qml/DialerPage/DialerPage.qml:64
+#: ../src/qml/SettingsPage/SettingsPage.qml:29
 msgid "Settings"
 msgstr ""
 
@@ -602,11 +666,11 @@ msgstr ""
 msgid "Swipe to reveal actions"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:177
+#: ../src/qml/LiveCallPage/LiveCall.qml:185
 msgid "Switch audio source:"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:558
+#: ../src/qml/LiveCallPage/LiveCall.qml:575
 msgid "Switch calls"
 msgstr ""
 
@@ -627,7 +691,7 @@ msgstr ""
 msgid "There is currently no network."
 msgstr ""
 
-#: ../src/qml/DialerPage/DialerPage.qml:467
+#: ../src/qml/DialerPage/DialerPage.qml:500
 msgid "This is not an emergency number."
 msgstr ""
 
@@ -636,11 +700,11 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:343
+#: ../src/qml/LiveCallPage/LiveCall.qml:352
 msgid "Ubuntu Phone"
 msgstr ""
 
-#: ../src/qml/LiveCallPage/LiveCall.qml:347
+#: ../src/qml/LiveCallPage/LiveCall.qml:356
 msgid "Unknown device"
 msgstr ""
 
