@@ -43,8 +43,6 @@ Page {
             return i18n.tr("Private number")
         } else if (phoneNumber == "x-ofono-unknown") {
             return i18n.tr("Unknown number")
-        } else if (contactWatcher.alias != "") {
-            return contactWatcher.alias
         }
         var formattedPhoneNumber = PhoneUtils.PhoneUtils.format(phoneNumber)
         if (formattedPhoneNumber !== "") {
@@ -53,7 +51,14 @@ Page {
         return phoneNumber
     }
 
-    title: getFormattedPhoneLabel(phoneNumber)
+    function getContactAliasOrPhoneNumber(phoneNumber) {
+        if (contactWatcher.alias != "") {
+            return contactWatcher.alias
+        }
+        return getFormattedPhoneLabel(phoneNumber);
+    }
+
+    title: getContactAliasOrPhoneNumber(phoneNumber)
 
     header: PageHeader {
         id: pageHeader
@@ -151,9 +156,9 @@ Page {
                 }
                 verticalAlignment: Text.AlignTop
                 fontSize: "medium"
-                text: getFormattedPhoneLabel(phoneNumber)
+                text: getContactAliasOrPhoneNumber(phoneNumber)
                 elide: Text.ElideRight
-                color: UbuntuColors.darkGrey
+                color: theme.palette.normal.backgroundSecondaryText
                 height: units.gu(2)
             }
 
@@ -284,7 +289,7 @@ Page {
                     leftMargin: units.gu(1)
                     verticalCenter: parent.verticalCenter
                 }
-                color: UbuntuColors.darkGrey
+                color: theme.palette.normal.backgroundSecondaryText
                 verticalAlignment: Qt.AlignVCenter
                 MouseArea {
                     anchors.fill:parent

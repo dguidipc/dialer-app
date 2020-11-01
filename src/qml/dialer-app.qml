@@ -52,7 +52,14 @@ MainView {
     signal closeUSSDProgressDialog
 
     property string pendingNumberToDial: ""
+    property string delayedDialNumber: ""
     property bool accountReady: false
+
+    onAccountReadyChanged: {
+        if (accountReady && delayedDialNumber.length > 0) {
+            call(delayedDialNumber, false)
+        }
+    }
 
     onApplicationActiveChanged: {
         if (applicationActive) {
@@ -94,7 +101,8 @@ MainView {
             }
 
             if (pendingNumberToDial != "") {
-                callManager.startCall(pendingNumberToDial, mainView.account.accountId);
+                var dialPrefix = setDelayedDialNumberAndReturnPrefix(pendingNumberToDial);
+                callManager.startCall(dialPrefix, mainView.account.accountId);
             }
             pendingNumberToDial = "";
         }
@@ -289,6 +297,7 @@ MainView {
     }
 
     function callEmergency(number) {
+        delayedDialNumber = "";
         // if we are in flight mode, we first need to disable it and wait for
         // the modems to update
         if (telepathyHelper.flightMode) {
@@ -331,9 +340,21 @@ MainView {
         callManager.startCall(number, account.accountId);
     }
 
+    function setDelayedDialNumberAndReturnPrefix(number) {
+        // If the number contains ';' or ',', we want to dial
+        // the leading number first, and key in everything later
+        // with delays
+        var semiIdx = number.indexOf(";"); semiIdx = (semiIdx == -1) ? number.length : semiIdx;
+        var commaIdx = number.indexOf(","); commaIdx = (commaIdx == -1) ? number.length : commaIdx;
+        var minDelayIdx = Math.min(semiIdx, commaIdx);
+        delayedDialNumber = number.substring(minDelayIdx);
+        return number.substring(0, minDelayIdx);
+    }
+
     function call(number, skipDefaultSimDialog) {
         // clear the values here so that the changed signals are fired when the new value is set
         pendingNumberToDial = "";
+        delayedDialNumber = "";
 
         if (number === "") {
             return
@@ -388,6 +409,8 @@ MainView {
             return
         }
 
+        var dialPrefix = setDelayedDialNumberAndReturnPrefix(number);
+
         animateLiveCall();
 
         if (!accountReady) {
@@ -397,14 +420,22 @@ MainView {
 
         if (account && account.connected) {
             generalSettings.lastCalledPhoneNumber = number
-            callManager.startCall(number, account.accountId);
+            callManager.startCall(dialPrefix, account.accountId);
+        }
+    }
+
+    function startCall(number) {
+        if (accountReady) {
+            call(number)
+        } else {
+           //postpone the call when account will be ready
+           delayedDialNumber = number
         }
     }
 
     function populateDialpad(number, accountId) {
         // populate the dialpad with the given number but don't start the call
         // FIXME: check what to do when not in the dialpad view
-
         // if not on the livecall view, go back to the dialpad
         while (pageStackNormalMode.depth > 1) {
             pageStackNormalMode.pop();
@@ -421,6 +452,7 @@ MainView {
                 dialerPage.bottomEdgeItem.collapse()
             }
         }
+
     }
 
     function removeLiveCallView() {

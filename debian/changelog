@@ -1,3 +1,9 @@
+dialer-app (0.2+gemian) xenial; urgency=medium
+
+  * Import to Gemian
+
+ -- Davide Guidi <davide@planetcom.co.uk>  Thu, 27 Jul 2017 02:21:56 +0200
+
 dialer-app (0.2+ubports1) xenial; urgency=medium
 
   * Import to UBports

@@ -132,6 +132,12 @@ Page {
                 closeTimer.running = false;
                 statusLabel.text = "";
                 liveCall.call = Qt.binding(function() { return callManager.foregroundCall; });
+
+                if (mainView.delayedDialNumber != "") {
+                    console.log("Arm delayed dial timer for text=" + mainView.delayedDialNumber);
+                    delayedDial.interval = 1;
+                    delayedDial.running = true;
+                }
             }
         }
 
@@ -145,6 +151,9 @@ Page {
         id: callConnection
         target: call
         onCallEnded: {
+            mainView.delayedDialNumber = "";
+            delayedDial.running = false;
+
             var callObject = {};
             callObject["elapsedTime"] = call.elapsedTime;
             callObject["active"] = true;
@@ -219,7 +228,7 @@ Page {
             }
             PropertyChanges {
                 target: dtmfButton
-                iconColor: UbuntuColors.green
+                iconColor: theme.palette.normal.positive
             }
         },
 
@@ -315,7 +324,7 @@ Page {
         running: false
         onTriggered: mainView.switchToKeypadView()
     }
- 
+
     Timer {
         id: closeTimer
         interval: mainView.greeterMode ? 2000 : 3000
@@ -336,6 +345,36 @@ Page {
                     greeterAnimationTimer.running = true
                 }
             }
+        }
+    }
+
+    Timer {
+        id: delayedDial
+        interval: 1000
+        repeat: false
+        running: false
+
+        onTriggered: {
+            if (mainView.delayedDialNumber.length == 0) {
+                // not re-arming the timer
+                return;
+            }
+
+            if (mainView.delayedDialNumber[0] == ";") {
+                interval = 1000;
+                console.log("wait for 1 second");
+            } else if (mainView.delayedDialNumber[0] == ",") {
+                interval = 2000;
+                console.log("wait for 2 second");
+            } else {
+                interval = 250;
+                console.log("dial " + mainView.delayedDialNumber[0]);
+                dtmfEntry += mainView.delayedDialNumber[0];
+                call.sendDTMF(mainView.delayedDialNumber[0]);
+            }
+
+            mainView.delayedDialNumber = mainView.delayedDialNumber.substring(1);
+            running = mainView.delayedDialNumber.length > 0;
         }
     }
 
@@ -494,7 +533,7 @@ Page {
                 horizontalCenter: parent.horizontalCenter
             }
             text: caller
-            color: UbuntuColors.darkGrey
+            color: theme.palette.normal.backgroundSecondaryText
 
             fontSize:"large"
             visible: !liveCall.compactView
@@ -574,7 +613,7 @@ Page {
 
             text: i18n.tr("Switch calls")
             color: mainView.backgroundColor
-            strokeColor: UbuntuColors.green
+            strokeColor: theme.palette.normal.positive
             onClicked: {
                 changeCallHoldingStatus(callManager.foregroundCall, true)
             }
@@ -589,7 +628,7 @@ Page {
 
             text: i18n.tr("Merge calls")
             color: mainView.backgroundColor
-            strokeColor: UbuntuColors.green
+            strokeColor: theme.palette.normal.positive
             onClicked: {
                 callManager.mergeCalls(callManager.calls[0], callManager.calls[1])
             }
@@ -671,7 +710,7 @@ Page {
             iconWidth: units.gu(3)
             iconHeight: units.gu(3)
             enabled: !mainView.greeterMode
-            onClicked: pageStackNormalMode.push(Qt.resolvedUrl("../ContactsPage/ContactsPage.qml"))
+            onClicked: pageStackNormalMode.push(Qt.resolvedUrl("../ContactsPage/ContactsPage.qml"), { "initialTab":"0", "initialState":"searching"})
         }
 
         LiveCallKeypadButton {

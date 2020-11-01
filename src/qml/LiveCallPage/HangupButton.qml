@@ -33,9 +33,7 @@ AbstractButton {
 
     UbuntuShape {
         anchors.fill: parent
-        //color: button.pressed ? "#cd3804" : "#dd4814"
-        color: button.pressed ? "#dd4814" : "red"
-        gradientColor: "#e24b3a"
+        color: button.pressed ? theme.palette.highlighted.negative : theme.palette.normal.negative
         radius: "medium"
     }
 
@@ -44,7 +42,7 @@ AbstractButton {
         width: units.gu(3)
         height: units.gu(3)
         name: "call-end"
-        color: "white"
+        color: theme.palette.normal.negativeText
         asynchronous: true
         z: 1
     }

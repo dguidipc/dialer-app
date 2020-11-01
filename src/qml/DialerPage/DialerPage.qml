@@ -54,10 +54,16 @@ Page {
         property list<Action> actionsGreeter
         property list<Action> actionsNormal: [
             Action {
+                objectName: "favorite-selected"
+                iconName: "favorite-selected"
+                text: i18n.tr("Favorite Contacts")
+                onTriggered: pageStackNormalMode.push(Qt.resolvedUrl("../ContactsPage/ContactsPage.qml"), {"initialTab":"1", "initialState":"default"})
+            },
+            Action {
                 objectName: "contacts"
                 iconName: "contact"
                 text: i18n.tr("Contacts")
-                onTriggered: pageStackNormalMode.push(Qt.resolvedUrl("../ContactsPage/ContactsPage.qml"))
+                onTriggered: pageStackNormalMode.push(Qt.resolvedUrl("../ContactsPage/ContactsPage.qml"), { "initialTab":"0", "initialState":"searching"})
             },
             Action {
                 iconName: "settings"
@@ -392,7 +398,7 @@ Page {
                 bottomMargin: units.gu(1)
             }
             text: contactWatcher.isUnknown ? "" : contactWatcher.alias
-            color: UbuntuColors.darkGrey
+            color: theme.palette.normal.backgroundSecondaryText
             opacity: text != "" ? 1 : 0
             fontSize: "small"
             Behavior on opacity {
@@ -443,6 +449,14 @@ Page {
                     // replace 0 by +
                     input.remove(input.cursorPosition - 1, input.cursorPosition)
                     input.insert(input.cursorPosition, "+")
+                } else if (dialNumber.length > 1 && keycode == Qt.Key_ssharp) {
+                    // replace '#' by ';'. don't do this if this itself is the first character
+                    input.remove(input.cursorPosition - 1, input.cursorPosition)
+                    input.insert(input.cursorPosition, ";")
+                } else if (dialNumber.length > 1 && keycode == Qt.Key_Asterisk) {
+                    // replace '*' by ','. don't do this if this itself is the first character
+                    input.remove(input.cursorPosition - 1, input.cursorPosition)
+                    input.insert(input.cursorPosition, ",")
                 }
             }
         }
@@ -477,7 +491,7 @@ Page {
                 }
 
                 if (mainView.greeterMode && !mainView.isEmergencyNumber(dialNumber)) {
-                    // we only allow users to call any number in greeter mode if there are 
+                    // we only allow users to call any number in greeter mode if there are
                     // no sim cards present. The operator will block the number if it thinks
                     // it's necessary.
                     // for phone accounts, active means the the status is not offline:
@@ -520,7 +534,7 @@ Page {
         PropertyAction {
             target: callButton
             property: "color"
-            value: "red"
+            value: theme.palette.normal.negative
         }
 
         ParallelAnimation {

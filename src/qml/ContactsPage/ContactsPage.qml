@@ -29,6 +29,8 @@ Page {
 
     property string phoneToAdd: ""
     property QtObject contactIndex: null
+    property alias initialState: contactsPage.state
+    property alias initialTab: pageHeaderSections.selectedIndex
 
     function moveListToContact(contact)
     {
@@ -39,6 +41,25 @@ Page {
             contactsPage.contactIndex = contact
         }
     }
+
+    function triggerAction(contactIndex, action) {
+
+        var currentContact = contactList.listModel.contacts[contactIndex]
+        if (currentContact.phoneNumbers.length > 1) {
+            var dialog = PopupUtils.open(chooseNumberDialog, contactsPage, {
+                'contact': currentContact
+            });
+            dialog.selectedPhoneNumber.connect(
+                        function(number) {
+                            mainView.startCall(number)
+                            PopupUtils.close(dialog);
+                        })
+        } else {
+            mainView.startCall(currentContact.phoneNumber.number)
+        }
+    }
+
+
 
     Connections {
         target: contactList.listModel
@@ -96,7 +117,7 @@ Page {
             onSelectedIndexChanged: {
                 switch (selectedIndex) {
                 case 0:
-                    contactList.showAllContacts()
+                    contactList.showAllContacts();
                     break;
                 case 1:
                     contactList.showFavoritesContacts()
@@ -146,7 +167,7 @@ Page {
                     onTriggered: {
                         contactList.forceActiveFocus()
                         contactsPage.state = "default"
-                        contactsPage.head.sections.selectedIndex = 0
+                        pageHeaderSections.selectedIndex = 0
                     }
                 }
             ]
@@ -182,6 +203,17 @@ Page {
             bottom: keyboardRect.top
         }
 
+        fetchHint: FetchHint {
+            detailTypesHint: [
+                ContactDetail.DisplayLabel,
+                ContactDetail.PhoneNumber,
+                ContactDetail.Email,
+                ContactDetail.Name,
+                ContactDetail.Avatar,
+                ContactDetail.Tag
+            ]
+        }
+
         showAddNewButton: true
         showImportOptions: (contactList.count === 0) &&
                            (filterTerm === "") &&
@@ -209,12 +241,62 @@ Page {
                                      contactList.listModel)
             }
         }
-    }
+        rightSideActions: [
+               Action {
+                   iconName: "call-start"
+                   text: i18n.tr("Call")
+                   onTriggered: {
+                       triggerAction(value.contactIndex, "tel")
+                   }
+               }
+
+           ]
+       }
+
+
+   Component {
+       id: chooseNumberDialog
+       Dialog {
+           id: dialog
+           property var contact
+           title: i18n.tr("Please select a phone number")
+           modal:true
+
+           signal selectedPhoneNumber(string number)
+
+           ListItem.ItemSelector {
+               id: phoneNumberList
+               anchors {
+                   left: parent.left
+                   right: parent.right
+               }
+               activeFocusOnPress: false
+               expanded: true
+               text: i18n.tr("Numbers") + ":"
+               model: contact.phoneNumbers
+               selectedIndex: -1
+               delegate: OptionSelectorDelegate {
+                   highlightWhenPressed: true
+                   text: modelData.number
+                   activeFocusOnPress: false
+               }
+               onDelegateClicked: selectedPhoneNumber(contact.phoneNumbers[index].number)
+           }
+
+           Connections {
+               target: __eventGrabber
+               onPressed: PopupUtils.close(dialog)
+           }
+       }
+   }
 
     Component.onCompleted: {
         if (QTCONTACTS_PRELOAD_VCARD !== "") {
             contactList.listModel.importContacts("file://" + QTCONTACTS_PRELOAD_VCARD)
         }
+	// focus the search field / show the keyboard on start
+        //state = "searching";
+        //state = initialState;
     }
 
     onActiveChanged: {
